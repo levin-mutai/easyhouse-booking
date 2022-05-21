@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="./img/icons/favicon-16x16.png">
+    <link href="../dist/css/style.min.css" rel="stylesheet">
+    <title><%= htmlWebpackPlugin.options.title %></title>
+    <script src="https://kit.fontawesome.com/83bfb9e6c9.js" crossorigin="anonymous"></script>
+    
+   
+  </head>
+  <body style="background-color: #FEFEFC">
+    <noscript>
+      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+    </noscript>
+    <div id="app"></div>
+    <div id="modal"></div>
+    <!-- built files will be auto injected -->
+    <script>
+      var search_terms = ['apple', 'apple watch', 'apple macbook', 'apple macbook pro', 'iphone', 'iphone 12'];
+ 
+          function autocompleteMatch(input) {
+            if (input == '') {
+              return [];
+            }
+            var reg = new RegExp(input)
+            return search_terms.filter(function(term) {
+              if (term.match(reg)) {
+                return term;
+              }
+            });
+          }
+            
+          function showResults(val) {
+            res = document.getElementById("result");
+            res.innerHTML = '';
+            let list = '';
+            let terms = autocompleteMatch(val);
+            for (i=0; i<terms.length; i++) {
+              list += '<li>' + terms[i] + '</li>';
+            }
+            res.innerHTML = '<ul>' + list + '</ul>';
+          }
+    </script>
+    <script src="js/extention/choices.js"></script>
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+  
+     <script src="./libs/jquery/dist/jquery.min.js"></script>
+     <!-- Bootstrap tether Core JavaScript -->
+     <script src="./libs/popper.js/dist/umd/popper.min.js"></script>
+     <script src="./libs/bootstrap/dist/js/bootstrap.min.js"></script>
+     <!-- apps -->
+     <!-- apps -->
+     <script src="../dist/js/app-style-switcher.js"></script>
+     <script src="../dist/js/feather.min.js"></script>
+     <!-- slimscrollbar scrollbar JavaScript -->
+     <script src="../assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
+     
+     <!--Wave Effects -->
+     <!-- themejs -->
+     <!--Menu sidebar -->
+     <script src="../dist/js/sidebarmenu.js"></script>
+     <!--Custom JavaScript -->
+     <script src="./js/custom.min.js"></script>
+  </body>
+</html>
