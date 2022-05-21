@@ -15,8 +15,14 @@
                                       </div>
                                   </form> -->
                                 <form autocomplete="off"><input  name="q" id="q" class="form-control custom-shadow custom-radius border-0 bg-white"
-                                              type="search" placeholder="Search" aria-label="Search" onkeyup="showResults(this.value)"  style="width:70%; margin-left:15%;"/>
-<div id="result"></div>
+                                              type="search" placeholder="Search by location" aria-label="Search" @keyup="showResults"  style="width:70%; margin-left:15%;" v-model="value"/>
+<div id="result">
+  <li v-for="data in list" :key="data" style="list-style-type: none; align-items: center;">
+    <ul style="color:black;font-weight: 800;" @click="loc = data, search()">
+      {{data}}
+    </ul>
+  </li>
+</div>
 </form>
                               </a>
                           </li>
@@ -27,17 +33,82 @@
 </template>
 
 <script>
+import axios from 'axios'
+// import miniToastr from 'mini-toastr' //ES6
+// miniToastr.init()
 export default {
     name: 'search',
 
     data(){
       return{
         value:"",
-        search_terms : ['apple', 'apple watch', 'apple macbook', 'apple macbook pro', 'iphone', 'iphone 12', 'car','carrot','levin'],
+        loc: null,
+        info: null,
+        list: [],
+        search_terms : [],
       }
     },
     methods:{
-     
+      autocompleteMatch(input) {
+            if (input == '') {
+              return [];
+            }
+            var reg = new RegExp(input)
+            return this.search_terms.filter(function(term) {
+              let lev = term.toLowerCase()
+              if (lev.match(reg)) {
+                return lev;
+              }
+            });
+          },
+            
+      showResults() {
+            // res = document.getElementById("result");
+            // res.innerHTML = '';
+            // let list = '';
+            this.list=[]
+            let terms = this.autocompleteMatch(this.value);
+            // for (i=0; i<terms.length; i++) {
+            //   this.list.push(terms[i])
+            // }
+            terms.forEach(element => {
+          this.list.push(element)
+        });
+          },
+      getData(){
+        axios.get('/api/v1/listings').then(res=>{
+          
+          this.info = res.data
+          // this.userdetails();
+          console.log("imerun withDefaults")
+          this.populateSearch()
+        }).catch(error=>{
+          console.log(error)
+          
+        })
+      },
+      populateSearch(){
+        this.info.forEach(element => {
+          this.search_terms.push(element.location)
+        });
+        console.log(this.search_terms)
+      },
+      search(){
+        let url = 'api/v1/search/'
+        let loc = this.loc
+        let n = '/'
+        axios.get(url+loc+n).then(res=>{
+          console.log(res.data)
+          this.$store.commit('setInfo', res.data)
+          console.log(this.$store.state.info)
+          this.$router.push('/listings')
+        }).catch(
+          // miniToastr.error("Check your internet connection","", 5000)
+        )
+      }
+    },
+    mounted(){
+      this.getData();
     }
 }
 </script>
@@ -68,9 +139,7 @@ export default {
   text-decoration: none;
   font-weight: 700;
 }
-#result ul li {
-  padding: 5px 0;
-}
+
 #result ul li:hover {
   background: #eee;
 }

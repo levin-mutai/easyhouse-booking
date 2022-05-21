@@ -42,7 +42,7 @@
                                     <button type="submit" class="btn btn-block btn-dark">Sign In</button>
                                 </div>
                                 <div class="col-lg-12 text-center mt-5">
-                                    Don't have an account? <a href="#" class="text-danger">Sign Up</a>
+                                    Don't have an account? <a href="/register" class="text-danger">Sign Up</a>
                                 </div>
                             </div>
                         </form>
@@ -96,13 +96,14 @@ data() {
           console.log(Response)
           const token = Response.data.auth_token
           
-          localStorage.setItem('email', this.username)
+          localStorage.setItem('email', this.email)
           this.$store.commit('setToken', token)
           axios.defaults.headers.common['Authorization'] = 'Token ' + token
           this.$store.commit('setUser', this.username)
           localStorage.setItem('token', token)
           
-          this.$router.push("/");
+          axios.defaults.headers.common['Authorization'] = 'token ' + token
+          this.$router.push("/listings");
        
         }).catch(err=>{
              miniToastr.error(err,"Wrong creds Please check and try agin", "incorrect creds", 5000)
@@ -111,15 +112,29 @@ data() {
          
           
         )
-      }
+      },
+      getData(){
+        axios.get('/api/v1/listings').then(res=>{
+          console.log(res.data)
+          this.$store.commit('setInfo', res.data)
+          this.userdetails();
+        }).catch(error=>{
+          console.log(error)
+          
+        })
+      },
     },
+    mounted(){
+        this.getData()
+    }
 }
 </script>
 
 <style lang='scss' scoped>
 .login{
      padding-top: 60px; 
-     overflow-y: hidden;
+    //  overflow-y: hidden;
+     overflow: hidden;
     .auth-box.row{
         margin-left: 30%;
     }

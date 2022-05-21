@@ -3,9 +3,10 @@ import { createStore } from "vuex";
 export default createStore({
   state: {
     username: null,
-    token: null,
+    token: localStorage.getItem('token'),
     r_id: null,
     phone: null,
+    info : ['levin'],
     isAuthenticated: false, 
   },
   mutations: {
@@ -27,6 +28,9 @@ export default createStore({
     },
     setRoom(state, id) {
       state.r_id = id
+    },
+    setInfo(state, data) {
+      state.info = data
     },
     setPhone(state, phon) {
       state.phone = phon

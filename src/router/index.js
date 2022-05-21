@@ -3,7 +3,7 @@ import Listings from "../views/Listings.vue";
 
 const routes = [
   {
-    path: "/",
+    path: "/listings",
     name: "Listings",
     component: Listings,
   },
@@ -37,13 +37,22 @@ const routes = [
       import(/* webpackChunkName: "about" */ "../components/booking-view.vue"),
   },
   {
-    path: "/login",
+    path: "/",
     name: "login",
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "about" */ "../components/login.vue"),
+  },
+  {
+    path: "/register",
+    name: "register",
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../components/register.vue"),
   },
 ];
 

@@ -1,11 +1,11 @@
 <template>
-  <div id="nav" style="z-index:4; box-shadow: -1px 1px 4px grey;">
+  <div id="nav" style="z-index:16; box-shadow: -1px 1px 4px grey;">
     <div class="logo">
       <img :src="require('./assets/easyhouse.png')" alt="bg" style="width:48px; height:90%; padding-top:4px;">
     </div>
     <div class="navbar">
       
-      <router-link to="/">Listings</router-link>
+      <router-link to="/listings">Listings</router-link>
       <router-link to="/reserved">Reserved</router-link>
       <router-link to="/watchlist">watch list</router-link>
     </div>
@@ -14,10 +14,10 @@
       <!-- <i class="fa fa-user-circle" aria-hidden="true" style="font-size:35px; padding-top:10px; float:right; padding-right:40px; vertical-align:middle;"></i> -->
      
       <div class="profile">
-         <div v-if="this.$store.state.isAuthenticated==false" style="margin-right:15px; margin-top:15px;">
-           <router-link to="/login">Login </router-link>
+         <div v-if="this.$store.state.token==undefined" style="margin-right:15px; margin-top:15px;">
+           <router-link to="/">Login </router-link>
          </div>
-        <ul style="list-style:none;" v-if="$store.state.isAuthenticated">
+        <ul style="list-style:none;" v-if="this.$store.state.token!=undefined">
           <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">
@@ -31,17 +31,7 @@
                                 <a class="dropdown-item" href="javascript:void(0)"><i data-feather="user"
                                         class="svg-icon mr-2 ml-1"></i>
                                     My Profile</a>
-                                <a class="dropdown-item" href="javascript:void(0)"><i data-feather="credit-card"
-                                        class="svg-icon mr-2 ml-1"></i>
-                                    My Balance</a>
-                                <a class="dropdown-item" href="javascript:void(0)"><i data-feather="mail"
-                                        class="svg-icon mr-2 ml-1"></i>
-                                    Inbox</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="javascript:void(0)"><i data-feather="settings"
-                                        class="svg-icon mr-2 ml-1"></i>
-                                    Account Setting</a>
-                                <div class="dropdown-divider"></div>
+                               
                                 <a class="dropdown-item" href="javascript:void(0)"><i data-feather="power"
                                         class="svg-icon mr-2 ml-1"></i>
                                     Logout</a>
@@ -58,9 +48,11 @@
   
   
   <router-view />
+  <Footeer/>
 </template>
 <script>
 // import login from './components/login.vue'
+import Footeer from './components/footeer.vue'
 export default {
  data() {
       return {
@@ -70,6 +62,7 @@ export default {
 
   components: {
     // login,
+    Footeer
   }
 }
 </script>

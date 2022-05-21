@@ -107,7 +107,7 @@
                           
                                           </div><!--/.packages-review-->
                                           <p class="col-6 card-text" ><small class="text-muted">{{data.location }}</small></p>
-                                          <button type="button" class="btn btn-success" style="float:right; margin-top:-60px;" @click="id=data.id;viewRoom();">More ..</button>
+                                          <button type="button" class="btn btn-success" style="float:right; margin-top:-60px; background-color:#18D26E ;" @click="id=data.id;viewRoom();">More ..</button>
                                   </div>
                                   <div class="widget-49-meeting-action">
                             <!-- <button class="btn btn-md btn-primary btn-block" type="submit" style="margin-right:-240px;">Book Now</button> -->
@@ -144,7 +144,8 @@ export default {
       getData(){
         axios.get('/api/v1/listings').then(res=>{
           console.log(res.data)
-          this.info = res.data
+          this.$store.commit('setInfo', res.data)
+          this.info = this.$store.state.info
           this.userdetails();
         }).catch(error=>{
           console.log(error)
@@ -181,7 +182,7 @@ export default {
         },
       viewRoom(){
       
-      if (this.$store.state.isAuthenticated==true) {
+      if (this.$store.state.token!=undefined) {
         this.$store.commit('setRoom',this.id);
         this.$router.push('/booking');
       } else {
@@ -203,7 +204,7 @@ export default {
   }
 },
     
-    mounted() {
+    beforeMount() {
       this.getData();
     },
     components: {
@@ -228,7 +229,7 @@ section{
 .listings{
   scroll-snap-type: y mandatory;
   overflow-y: scroll ;
-  height: 100vh;
+  // height: 100vh;
 }
 .fa.fa-star{
   color: green;
@@ -259,7 +260,7 @@ li{
     padding-top:74px;
  background: #cccccc;
     /* margin-top:20px; */
-    height: 100vh;
+    // height: 100vh;
     width: 90%;
     align-self: center;
 }

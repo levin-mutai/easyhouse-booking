@@ -243,11 +243,11 @@ export default {
 }).then(res=>{
             console.log(res.data)
             miniToastr.success('Reserved successfully',"added"+this.house+"to reserves", 5000)
-            this.$router.push("/");
+            this.$router.push("/listings");
             this.messageCustomer()
         }).catch(error=>{
          miniToastr.error('Already Reserved'+error,this.house+"is already reserved ", 5000)
-          this.$router.push("/");
+          this.$router.push("/listings");
         })
       },
 

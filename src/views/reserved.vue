@@ -113,6 +113,21 @@ export default {
     });
   },
     methods:{
+        userdetails(){
+            axios.get('/api/v1/users/me/', {
+            headers: {
+                'Authorization': `token ${this.$store.state.token}`
+            }
+            })
+            .then((res) => {
+            this.$store.commit('setUser',res.data.username);
+            this.$store.commit('setPhone',res.data.phonenumber)
+            localStorage.setItem('username', res.data.username)
+            })
+            .catch((error) => {
+            console.error(error)
+            })
+        },
 
         onButtonClick() {
         this.intaSendInstance
@@ -142,6 +157,7 @@ export default {
         
     },
     beforeMount(){
+        this.userdetails()
         this.getData()
     }
 }
