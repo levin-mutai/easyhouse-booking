@@ -142,7 +142,7 @@ export default {
     },
     methods: {
       getData(){
-        axios.get('http://localhost:8000/api/v1/listings').then(res=>{
+        axios.get('/api/v1/listings').then(res=>{
           console.log(res.data)
           this.info = res.data
           this.userdetails();
@@ -152,7 +152,7 @@ export default {
         })
       },
        searchListings(){
-        axios.get('http://localhost:8000/api/v1/search').then(res=>{
+        axios.get('/api/v1/search').then(res=>{
           console.log(res.data)
           this.search = res.data
         }).catch(error=>{
@@ -186,7 +186,7 @@ export default {
         this.$router.push('/booking');
       } else {
        Swal.fire({
-        title: 'Not Logged In!',
+        title: 'Not Logged in!',
         text: 'Please Login',
         icon: 'error',
         confirmButtonText: 'Cool'
