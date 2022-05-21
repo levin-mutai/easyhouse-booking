@@ -93,6 +93,7 @@
 <script>
 // import Swal from 'sweetalert2'
 const IntaSend = require("intasend-inlinejs-sdk")
+
 const PUBLIC_KEY = "ISPubKey_live_1a2b4350-e1a4-458a-a922-4e2f35118c95u";
 import axios from "axios";
 export default {

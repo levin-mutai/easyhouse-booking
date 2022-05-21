@@ -256,6 +256,7 @@ export default {
 
         let message  = "Thank you for booking a house with us. We will get back to you soo after confirming availability of "+this.house;
         console.log(this.phonenumber);
+        // sha256-vucLmrjdfi9YwjGY/3CQ7HnccFSS/XRS1M/3k/FDXJw=
         let app_token = "h0H86MxmAwQAXJz9N09n8Ng7gCz3mVN5";
         let partnerid = "4211";
         let url = 'https://quicksms.advantasms.com/api/services/sendsms/';
