@@ -226,7 +226,7 @@ export default {
         // function to post the data to the booking table in the database
        postData(){
         
-            let add = this.id+this.email;
+            let add = this.house+this.email;
            
     
             let url = 'api/v1/reserved';
