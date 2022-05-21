@@ -17,7 +17,7 @@ import 'vue-universal-modal/dist/index.css'
 
 // import VueUniversalModal from 'vue-universal-modal'
 
-axios.defaults.baseURL = "http://localhost:8000/"
-// axios.defaults.baseURL = "https://easyhouse-booking.herokuapp.com/"
+// axios.defaults.baseURL = "http://localhost:8000/"
+axios.defaults.baseURL = "https://easyhouse-booking.herokuapp.com/"
 
 createApp(App).use(store).use(router, axios).use(intaSend).mount("#app").use(VueToast);
