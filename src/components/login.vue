@@ -80,11 +80,7 @@ data() {
 
     methods: {
       submitForm(){
-        
-        // const formData = {
-       /listings //   username: this.username,
-        //   password: this.password 
-        // }
+    
         axios.post('/api/v1/token/login',{
           "password": this.password,
           "email": this.email   
